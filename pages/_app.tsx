@@ -1,37 +1,44 @@
 import "../styles/globals.css";
 import "@interchain-ui/react/styles";
 
-import type { AppProps } from "next/app";
-import {
-  Box,
-  ThemeProvider,
-  useColorModeValue,
-  useTheme,
-  AssetList,
-  Button,
-} from "@interchain-ui/react";
+import { Box, ThemeProvider, AssetList, Button } from "@interchain-ui/react";
 import styled from "@emotion/styled";
 import { useState } from "react";
-import Modal from "@/components/modal";
-import { list } from "@/mock";
+import { Modal, DepositModal } from "@/components/";
+import { useAssetListStore } from "@/store";
+import { AssetType } from "@/type";
 
 function CreateCosmosApp() {
-  const { themeClass } = useTheme();
   const [isModal, setIsModal] = useState(false);
-  console.log(isModal);
+  const [isOnDeposit, setIsOnDepositModal] = useState(false);
+  const assetList = useAssetListStore((state) => state.assetList);
+
+  assetList.forEach((asset: AssetType) => {
+    asset.onDeposit = () => {
+      setIsOnDepositModal(true);
+    };
+  });
+
   return (
     <ThemeProvider>
-      <Box
-        className={themeClass}
-        minHeight="100dvh"
-        backgroundColor={useColorModeValue("$white", "$background")}
-      >
-        <AssetList needChainSpace list={list} titles={["Asset", "Balance"]} />
-        <Button onClick={() => setIsModal(true)}>Add Asset</Button>
+      <Box padding="20px" display="flex" flexDirection="column" rowGap="15px">
+        <AssetList
+          needChainSpace
+          list={assetList}
+          titles={["Asset", "Balance"]}
+        />
+
+        <Box alignSelf="flex-end">
+          <Button onClick={() => setIsModal(true)}>Add Asset</Button>
+        </Box>
         <Modal
           isOpen={isModal}
           title={"Add Asset"}
           onClose={() => setIsModal(false)}
+        />
+        <DepositModal
+          isOpen={isOnDeposit}
+          onClose={() => setIsOnDepositModal(false)}
         />
       </Box>
     </ThemeProvider>

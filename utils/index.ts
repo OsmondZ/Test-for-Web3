@@ -1,11 +1,22 @@
-import { chains } from 'chain-registry';
-import { Asset, Chain } from '@chain-registry/types';
+import { Logo_URIs } from "@/type";
 
-export function getLogo(from: Asset | Chain) {
-  return from.logo_URIs?.svg || from.logo_URIs?.png || from.logo_URIs?.jpeg;
-}
-
-export function getChainLogo(name: string) {
-  const chain = chains.find(chain => chain.chain_name === name)
-  return chain ? getLogo(chain) : null;
-}
+export const createCustomObjectArray = (data: any) =>
+  data.map(
+    ({
+      name,
+      symbol,
+      logo_URIs,
+    }: {
+      name: string;
+      symbol: string;
+      logo_URIs: Logo_URIs;
+    }) => ({
+      onDeposit: () => {},
+      onWithdraw: () => {},
+      name,
+      symbol,
+      imgSrc: logo_URIs?.png || logo_URIs?.svg || logo_URIs,
+      tokenAmount: "100",
+      tokenAmountPrice: "100",
+    })
+  );

@@ -1,3 +1,3 @@
 export * from "./common";
 export * from "./wallet";
-export * from "./modal";
+export * from "../pages/modal";

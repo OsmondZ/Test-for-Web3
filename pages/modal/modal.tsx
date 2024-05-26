@@ -1,4 +1,4 @@
-import { BasicModal, Combobox } from "@interchain-ui/react";
+import { BasicModal, Box, Button, Combobox } from "@interchain-ui/react";
 import React from "react";
 import MyComboBox from "../combobox";
 
@@ -13,7 +13,14 @@ export default function Modal({
 }) {
   return (
     <BasicModal isOpen={isOpen} title={title} onClose={onClose}>
-      <MyComboBox />
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+       
+      >
+        <MyComboBox onClose={onClose} />
+      </Box>
     </BasicModal>
   );
 }
