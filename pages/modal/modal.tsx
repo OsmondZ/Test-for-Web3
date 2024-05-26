@@ -1,4 +1,4 @@
-import { BasicModal, Box, Button, Combobox } from "@interchain-ui/react";
+import { BasicModal, Box } from "@interchain-ui/react";
 import React from "react";
 import MyComboBox from "../combobox";
 

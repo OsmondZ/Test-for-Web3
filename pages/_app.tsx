@@ -2,7 +2,6 @@ import "../styles/globals.css";
 import "@interchain-ui/react/styles";
 
 import { Box, ThemeProvider, AssetList, Button } from "@interchain-ui/react";
-import styled from "@emotion/styled";
 import { useState } from "react";
 import { Modal, DepositModal } from "@/components/";
 import { useAssetListStore } from "@/store";
